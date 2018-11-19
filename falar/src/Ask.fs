@@ -43,4 +43,5 @@ let start (languageChoice : Language) (vocabularyData : seq<World.World>) : unit
     let display = display' totalWorlds languageChoice
 
     vocabularyData
+    |> Seq.sortBy (fun _ -> System.Random().Next ())
     |> Seq.iteri display
