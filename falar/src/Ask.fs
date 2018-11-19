@@ -16,24 +16,31 @@ let init : Language =
     | "3" -> Both
     | _ -> Portuguese
 
-let rec go =
-    let argument = System.Console.ReadLine()
-    printfn "%A" argument
-    // go ()
+// let rec go =
+//     let argument = System.Console.ReadLine()
+//     printfn "%A" argument
+//     go ()
 
-let display' (totalWorlds : int) (index : int) (world : World.World) =
-    printfn "Progression: %A" (index / totalWorlds)
-    printfn "%A" world.Portuguese
+let display' (totalWorlds : int) (languageChoice : Language) (index : int) (world : World.World) : unit =
+    let worldTobeGuessed, correctAnswer =
+      match languageChoice with
+      | English -> (world.Portuguese, world.English)
+      | _ -> (world.English, world.Portuguese)
+
+    printfn "\n Progression: %i / %i" (index + 1) totalWorlds
+    printfn "Give the translation for: %s" worldTobeGuessed
     let answer = System.Console.ReadLine()
-    printfn "%A" answer
 
-let start languageChoice vocabularyData =
-    printfn "Starting the exercise"
-    // printfn "%A" vocabularyData
+    let result =
+      match answer = correctAnswer with
+      | true -> "Well done!"
+      | _ -> sprintf "Nope, you meant: %s" correctAnswer
+    printfn "%s" result
+
+let start (languageChoice : Language) (vocabularyData : seq<World.World>) : unit =
+    printfn "\n Starting the exercise"
     let totalWorlds = Seq.length vocabularyData
-    let display = display' totalWorlds
+    let display = display' totalWorlds languageChoice
 
     vocabularyData
     |> Seq.iteri display
-
-// let q = seq [{Portuguese = "um"; English = "one";}; {Portuguese = "dois"; English = "two";}]
