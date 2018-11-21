@@ -1,14 +1,11 @@
 module Falar
 
 [<EntryPoint>]
-let main argv =
+let main _argv =
     let languageChoice = Ask.init
-    printfn "Choosen:"
-    printfn "%A" languageChoice
-    // let argument = System.Console.ReadLine()
+    printfn "\n Choosen: %A" languageChoice
 
     let vocabularyData = VocabularyData.get
 
     Ask.start languageChoice vocabularyData
-    // printfn "%A" argv
     0 // return an integer exit code
