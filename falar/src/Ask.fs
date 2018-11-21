@@ -1,9 +1,6 @@
 module Ask
 
-type Language =
-  | Portuguese
-  | English
-  | Both
+open FalarType
 
 let init : Language =
     printfn "Select choice:"
@@ -11,17 +8,17 @@ let init : Language =
     printfn "2. Translate from Portuguese to English"
 
     match System.Console.ReadLine() with
-    | "1" -> Portuguese
-    | "2" -> English
-    | "3" -> Both
-    | _ -> Portuguese
+    | "1" -> Language.Portuguese
+    | "2" -> Language.English
+    | "3" -> Language.Both
+    | _ -> Language.Portuguese
 
 // let rec go =
 //     let argument = System.Console.ReadLine()
 //     printfn "%A" argument
 //     go ()
 
-let display' (totalWorlds : int) (languageChoice : Language) (index : int) (world : World.World) : unit =
+let display' (totalWorlds : int) (languageChoice : Language) (index : int) (world : World) : unit =
     let worldTobeGuessed, correctAnswer =
       match languageChoice with
       | English -> (world.Portuguese, world.English)
@@ -37,7 +34,7 @@ let display' (totalWorlds : int) (languageChoice : Language) (index : int) (worl
       | _ -> sprintf "Nope, you meant: %s" correctAnswer
     printfn "%s" result
 
-let start (languageChoice : Language) (vocabularyData : seq<World.World>) : unit =
+let start (languageChoice : Language) (vocabularyData : seq<World>) : unit =
     printfn "\n Starting the exercise"
     let totalWorlds = Seq.length vocabularyData
     let display = display' totalWorlds languageChoice
