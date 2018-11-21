@@ -9,6 +9,7 @@
   <ItemGroup>
     <Compile Include="src/FalarType.fs" />
     <Compile Include="src/Result.fs" />
+    <Compile Include="src/ResultExporter.fs" />
     <Compile Include="src/VocabularyData.fs" />
     <Compile Include="src/Ask.fs" />
     <Compile Include="falar.fs" />

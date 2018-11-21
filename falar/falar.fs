@@ -2,7 +2,7 @@ module Falar
 
 [<EntryPoint>]
 let main argv =
-    Result.saveCsv
+    ResultExporter.saveCsv
     let languageChoice = Ask.init
     printfn "Choosen:"
     printfn "%A" languageChoice

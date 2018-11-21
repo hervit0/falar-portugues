@@ -1,4 +1,4 @@
-module Result
+module ResultExporter
 
 open FSharp.Data
 open FalarType

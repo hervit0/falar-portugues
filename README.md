@@ -43,3 +43,12 @@ let myRows =
 let myCsv = new MyCsvType(myRows)
 myCsv.Save(__SOURCE_DIRECTORY__ + "/../output/vocabulary.csv")
 ```
+
+- Infinite prompt trick
+
+```
+let rec go =
+    let argument = System.Console.ReadLine()
+    printfn "%A" argument
+    go ()
+```

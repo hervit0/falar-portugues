@@ -13,11 +13,6 @@ let init : Language =
     | "3" -> Language.Both
     | _ -> Language.Portuguese
 
-// let rec go =
-//     let argument = System.Console.ReadLine()
-//     printfn "%A" argument
-//     go ()
-
 let display' (totalWorlds : int) (languageChoice : Language) (index : int) (world : World) : unit =
     let worldTobeGuessed, correctAnswer =
       match languageChoice with
