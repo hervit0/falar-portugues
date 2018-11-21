@@ -52,3 +52,7 @@ let rec go =
     printfn "%A" argument
     go ()
 ```
+
+- A sequence
+
+`let  = seq [{Portuguese = "um"; English = "one";}; {Portuguese = "dois"; English = "two";}]`

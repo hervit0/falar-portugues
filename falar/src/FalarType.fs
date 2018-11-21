@@ -18,3 +18,9 @@ type Guess =
     Answer : string
     Correctness : string
   }
+
+type Exercise =
+  {
+    RemainingWorlds : int
+    Guesses : seq<Guess>
+  }

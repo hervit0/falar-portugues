@@ -13,27 +13,37 @@ let init : Language =
     | "3" -> Language.Both
     | _ -> Language.Portuguese
 
-let display' (totalWorlds : int) (languageChoice : Language) (index : int) (world : World) : unit =
+let display' (totalWorlds : int) (languageChoice : Language) (exercise : Exercise) (world : World) : Exercise =
     let worldTobeGuessed, correctAnswer =
       match languageChoice with
       | English -> (world.Portuguese, world.English)
       | _ -> (world.English, world.Portuguese)
 
-    printfn "\n Progression: %i / %i" (index + 1) totalWorlds
+    printfn "\n Progression: %i / %i" (totalWorlds - exercise.RemainingWorlds + 1) totalWorlds
     printfn "Give the translation for: %s" worldTobeGuessed
     let answer = System.Console.ReadLine()
+    let correctness = answer = correctAnswer
 
     let result =
-      match answer = correctAnswer with
-      | true -> "Well done!"
-      | _ -> sprintf "Nope, you meant: %s" correctAnswer
+      match correctness with
+      | true -> "\n=> Well done!"
+      | _ -> sprintf "\n=> Nope, you meant: %s" correctAnswer
     printfn "%s" result
 
-let start (languageChoice : Language) (vocabularyData : seq<World>) : unit =
+    let updatedGuesses = Result.updateGuesses exercise.Guesses world answer correctness
+
+    match exercise.RemainingWorlds with
+    | 1 -> ResultExporter.saveCsv updatedGuesses
+    | _ -> ()
+
+    { exercise with RemainingWorlds = exercise.RemainingWorlds - 1; Guesses = updatedGuesses }
+
+let start (languageChoice : Language) (vocabularyData : seq<World>) : Exercise =
     printfn "\n Starting the exercise"
     let totalWorlds = Seq.length vocabularyData
     let display = display' totalWorlds languageChoice
+    let initialExerciseState = { RemainingWorlds = totalWorlds; Guesses = Seq.empty }
 
     vocabularyData
     |> Seq.sortBy (fun _ -> System.Random().Next ())
-    |> Seq.iteri display
+    |> Seq.fold display initialExerciseState
