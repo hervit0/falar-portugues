@@ -60,6 +60,7 @@ let webApp =
         GET >=>
             choose [
                 route "/" >=> indexHandler "world"
+                route "/words" >=> json Words.staticResponse
                 routef "/hello/%s" indexHandler
             ]
         setStatusCode 404 >=> text "Not Found" ]

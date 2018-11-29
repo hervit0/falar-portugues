@@ -10,6 +10,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Type/Words.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
   <ItemGroup>
