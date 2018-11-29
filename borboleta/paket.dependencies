@@ -17,3 +17,5 @@ nuget Microsoft.NET.Test.Sdk
 nuget xunit
 nuget xunit.runner.visualstudio
 nuget Microsoft.AspNetCore.TestHost
+nuget FSharp.Core
+nuget FSharp.Data ~> 2.4.0

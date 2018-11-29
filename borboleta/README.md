@@ -33,3 +33,9 @@ After the application has started visit [http://localhost:5000](http://localhost
 ## Notes
 
 - containerization: https://docs.microsoft.com/en-us/dotnet/core/docker/docker-basics-dotnet-core
+
+## Postgres
+
+- Specific Posgres: https://fsprojects.github.io/SQLProvider/core/postgresql.html
+- SQL Provider: http://fsprojects.github.io/SQLProvider/
+- SQL Querying: http://fsprojects.github.io/SQLProvider/core/querying.html

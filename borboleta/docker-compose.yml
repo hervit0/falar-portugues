@@ -1,6 +1,12 @@
 version: '3'
 services:
+  borboleta-db:
+    image: postgres:9.6-alpine
+    ports:
+      - "5432"
   borboleta:
     build: .
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@borboleta-db
     ports:
       - "5000:5000"

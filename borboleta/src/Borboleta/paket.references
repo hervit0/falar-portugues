@@ -8,4 +8,6 @@ Microsoft.Extensions.Logging.Console
 Microsoft.Extensions.Logging.Debug
 Microsoft.AspNetCore.Authentication.Cookies
 Microsoft.Extensions.DependencyInjection
+FSharp.Core
+FSharp.Data
 Giraffe
