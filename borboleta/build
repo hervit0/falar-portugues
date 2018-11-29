@@ -1,0 +1,10 @@
+#!/bin/sh
+
+if [ ! -e "paket.lock" ]
+then
+    exec mono .paket/paket.exe install
+fi
+
+paket install
+dotnet restore src/Borboleta
+dotnet build src/Borboleta

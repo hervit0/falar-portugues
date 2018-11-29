@@ -99,18 +99,23 @@ let configureLogging (builder : ILoggingBuilder) =
     let filter (l : LogLevel) = l.Equals LogLevel.Error
     builder.AddFilter(filter).AddConsole().AddDebug() |> ignore
 
+let withCustomServedUrls (webHost : IWebHostBuilder) : IWebHostBuilder =
+    match Environment.GetEnvironmentVariable "GIRAFFE_ENV" with
+    | "development" -> webHost.UseUrls("http://0.0.0.0:5000")
+    | _ -> webHost.UseUrls("http://*:8080")
+
 [<EntryPoint>]
 let main _ =
     let contentRoot = Directory.GetCurrentDirectory()
     let webRoot     = Path.Combine(contentRoot, "WebRoot")
-    WebHostBuilder()
-        .UseKestrel()
-        .UseContentRoot(contentRoot)
-        .UseIISIntegration()
-        .UseWebRoot(webRoot)
-        .Configure(Action<IApplicationBuilder> configureApp)
-        .ConfigureServices(configureServices)
-        .ConfigureLogging(configureLogging)
-        .Build()
-        .Run()
+    let webHost = WebHostBuilder()
+                    .UseKestrel()
+                    .UseContentRoot(contentRoot)
+                    .UseIISIntegration()
+                    .UseWebRoot(webRoot)
+                    .Configure(Action<IApplicationBuilder> configureApp)
+                    .ConfigureServices(configureServices)
+                    .ConfigureLogging(configureLogging)
+
+    withCustomServedUrls(webHost).Build().Run()
     0

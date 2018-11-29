@@ -1,0 +1,15 @@
+# FROM fsharp:10.0.2-netcore
+FROM fsharp:10.2.1
+
+RUN apt-get update && \
+    apt-get --no-install-recommends install -y locales autoconf libtool pkg-config make automake nuget mono-devel msbuild ca-certificates-mono && \
+    rm -rf /var/lib/apt/lists/* && \
+    echo 'en_US.UTF-8 UTF-8' > /etc/locale.gen && /usr/sbin/locale-gen
+
+WORKDIR /usr/src/app
+
+ADD . /usr/src/app
+
+# RUN sh -c "./build"
+
+# CMD sh -c "./run"

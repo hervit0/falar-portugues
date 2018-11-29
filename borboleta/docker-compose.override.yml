@@ -1,0 +1,13 @@
+version: '3'
+services:
+  borboleta:
+    build:
+      dockerfile: Dockerfile.dev
+      context: .
+    command: sh -c "while sleep 1; do :; done"
+    volumes:
+      - .:/usr/src/app:rw
+    environment:
+      GIRAFFE_ENV: development
+    ports:
+      - "5000:5000"

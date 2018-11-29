@@ -29,3 +29,7 @@ dotnet run src/Borboleta
 ```
 
 After the application has started visit [http://localhost:5000](http://localhost:5000) in your preferred browser.
+
+## Notes
+
+- containerization: https://docs.microsoft.com/en-us/dotnet/core/docker/docker-basics-dotnet-core
